@@ -12,14 +12,15 @@ module.exports = {
  * @returns the current session
  */
 function findOrCreateSession(facebookID) {
-
+    console.log("hello from find or create session");
     let session = null;
     // look for current session in Dynamo
 
     // if session is null, build a new one
     if(!session) {
         //create new sessionId
-        var sessionId = new Data().toISOString();
+        session = {};
+        var sessionId = new Date().toISOString();
         session.id = sessionId;
         session.fbid = facebookID;
         session.context = {};

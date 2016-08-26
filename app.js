@@ -8,6 +8,7 @@ var app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('public'));
+app.use(bodyParser.json());
 
 app.post('/analyze', receive.receivedMessageFromMessenger);
 
