@@ -1,4 +1,9 @@
+'use strict';
 
+module.exports = {
+    findOrCreateSession: findOrCreateSession,
+    setSession: setSession
+};
 
 
 /**
@@ -7,15 +12,26 @@
  * @returns the current session
  */
 function findOrCreateSession(facebookID) {
-    // query DynamoDB for current session
-    // if found return session
-    // else create session and return
+
+    let session = null;
+    // look for current session in Dynamo
+
+    // if session is null, build a new one
+    if(!session) {
+        //create new sessionId
+        var sessionId = new Data().toISOString();
+        session.id = sessionId;
+        session.fbid = facebookID;
+        session.context = {};
+    }
+
+    return session;
 }
 
 /**
  * Sets/updates session in DynamoDB
  */
-function setSession() {
-
+function setSession(session) {
+    // send session to Dynamo
 }
 
