@@ -1,0 +1,19 @@
+{
+  "name": "witai",
+  "version": "1.0.0",
+  "description": "Wit.ai node app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "node-wit": "^4.1.0"
+  },
+  "engines": {
+    "node": "~6.3.0"
+  }
+}
