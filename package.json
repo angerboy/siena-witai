@@ -12,6 +12,8 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "fb": "^1.1.1",
+    "firebase": "^3.3.0",
     "node-wit": "^4.1.0",
     "sessions": "0.0.2-7"
   },

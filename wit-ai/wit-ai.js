@@ -2,7 +2,7 @@
 
 const Wit = require('node-wit').Wit;
 const log = require('node-wit').log;
-const session = require('../sessions/sessions');
+const sessions = require('../sessions/sessions');
 const config = require('../config/default.json');
 const actions = require('./actions').getActions();
 
@@ -22,13 +22,14 @@ module.exports = {
  * @param text
  */
 function callWitAI(facebookID, text) {
-    const session = session.findOrCreateSession(facebookID);
+    const session = sessions.findOrCreateSession(facebookID);
     wit.runActions(
         session.id,
         text,
         session.context
     ).then((context) => {
         console.log('Waiting for next user messages...');
+        console.log(context);
         session.context = context;
         sessions.setSession(context);
     })

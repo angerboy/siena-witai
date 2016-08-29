@@ -12,7 +12,6 @@ module.exports = {
  * @returns the current session
  */
 function findOrCreateSession(facebookID) {
-    console.log("hello from find or create session");
     let session = null;
     // look for current session in Dynamo
 
@@ -34,5 +33,6 @@ function findOrCreateSession(facebookID) {
  */
 function setSession(session) {
     // send session to Dynamo
+    console.log('set session');
 }
 

@@ -1,3 +1,6 @@
 {
-    "witAccessToken": "5COSSXOHFXEJRVUXVMTC25ZX7MS7EFVA"
+    "witAccessToken": "5COSSXOHFXEJRVUXVMTC25ZX7MS7EFVA",
+    "sienaAILayerEndpoint": "https://s3.amazonaws.com/sienaia/Siena-AI-prod-swagger.json",
+    "fbAppId": "613158658850207",
+    "fbAppSecret": "c17851ecdbd9cff399754bb71e965077"
 }
