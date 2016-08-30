@@ -18,6 +18,11 @@ function generateSienaAIQuery(entities, intent, context) {
     if(context.detail) {
         data.detail = context.detail.toLowerCase();
     }
+    if(entities.keyword) {
+        entities.keyword.forEach(function(keyword) {
+            data.keyword.push(keyword.value.toLowerCase());
+        });
+    }
 
     return data;
 }

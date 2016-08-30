@@ -23,6 +23,7 @@ module.exports = {
  */
 function callWitAI(facebookID, text) {
     const session = sessions.findOrCreateSession(facebookID);
+    session.context.fbid = facebookID;
     wit.runActions(
         session.id,
         text,

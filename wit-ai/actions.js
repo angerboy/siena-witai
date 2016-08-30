@@ -3,6 +3,7 @@
 const session = require('../sessions/sessions');
 const api = require('../api/api');
 const actionUtils = require('../utils/wit-utils');
+const sendModule = require('../messages/send');
 
 const firstEntityValue = (entities, entity) => {
     const val = entities && entities[entity] &&
@@ -43,8 +44,8 @@ function send(request, response) {
     // find facebook id
     // send message
     console.log('Our bot wants to talk!');
-    console.log(request);
-    console.log(response);
+    // console.log(request);
+    // console.log(response);
 
     return new Promise(function(resolve, reject) {
         console.log('user said...', request.text);
@@ -74,21 +75,27 @@ function getInfo({sessionId, context, text, entities}) {
     // console.log(`The current context is ${JSON.stringify(context)}`);
     // console.log(`Wit extracted ${JSON.stringify(entities)}`);
     // return Promise.resolve(context);
-    return new Promise(function(resolve, reject) {
-        const keyword = firstEntityValue(entities, 'keyword');
-        const intent = firstEntityValue(entities, 'intent');
-        const detail = firstEntityValue(entities, 'detail');
-        if(keyword) {
-            context.keyword = keyword;
-        }
-        if(intent) {
-            context.intent = intent;
-        }
-        if(detail) {
-            context.detail = detail;
-        }
-        return resolve(context);
-    })
+    // return new Promise(function(resolve, reject) {
+    //     const keyword = firstEntityValue(entities, 'keyword');
+    //     const intent = firstEntityValue(entities, 'intent');
+    //     const detail = firstEntityValue(entities, 'detail');
+    //     if(keyword) {
+    //         context.keyword = keyword;
+    //     }
+    //     if(intent) {
+    //         context.intent = intent;
+    //     }
+    //     if(detail) {
+    //         context.detail = detail;
+    //     }
+    //     return resolve(context);
+    // })
+    const keyword = firstEntityValue(entities, 'keyword');
+    if(keyword) {
+        context.keyword = keyword;
+        const witResponse = actionUtils.generateSienaAIQuery(entities, 'info', context);
+        callSiena(witResponse, context);
+    }
 }
 
 function getTalk({sessionId, context, text, entities}) {
@@ -110,18 +117,9 @@ function getTopic({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
     if(detail) {
-        console.log("query sienaAI");
         context.detail = detail;
         const witResponse = actionUtils.generateSienaAIQuery(entities, 'topic', context);
-        api.accessAPI(witResponse)
-            .then(function(data) {
-                const response = data.data || {};
-                const responseText = response.chatbotText || response.displayText || "";
-                if(response.cards) {
-                    const cards = response.cards;
-
-                }
-            });
+        callSiena(witResponse, context);
     }
     return Promise.resolve(context);
 }
@@ -147,6 +145,22 @@ function getDemo({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+}
+
+
+/**
+ *  Utility functions
+ */
+
+/**
+ * make the call to Siena
+ * @param query
+ */
+function callSiena(query, context) {
+    api.accessAPI(query)
+        .then(function(data) {
+            sendModule.buildChatbotResponseFromSienaResponse(data, context);
+        });
 }
 
 
