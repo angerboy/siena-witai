@@ -64,8 +64,10 @@ function getPerson({sessionId, context, text, entities}) {
     console.log(`Contact value `, firstEntityValue(entities, 'contact'));
     const contact = firstEntityValue(entities, 'contact');
     if(contact) {
-        context.keyword = contact;
+        context.name = contact;
     }
+    const witResponse = actionUtils.generateSienaAIQuery(entities, 'person', context);
+    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -104,9 +106,12 @@ function getTalk({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
+    const keyword = firstEntityValue(entities, 'keyword');
     if(detail) {
         context.detail = detail;
     }
+    const witResponse = actionUtils.generateSienaAIQuery(entities, 'talk', context);
+    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
