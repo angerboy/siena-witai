@@ -5,8 +5,7 @@ var FB = require('fb');
 const config = require('../config/default.json');
 
 module.exports = {
-    pushUserInNeed:pushUserInNeed,
-    getFacebookAccessTokenAndRetrieveName:getFacebookAccessTokenAndRetrieveName
+    pushUserInNeed:pushUserInNeed
 };
 
 function getDatabaseRef() {
@@ -22,44 +21,26 @@ function getDatabaseRef() {
     return database;
 }
 
-function getFacebookAccessTokenAndRetrieveName(fbid) {
-    FB.api('oauth/access_token', {
-        client_id: config.fbAppId,
-        client_secret: config.fbAppSecret,
-        grant_type: 'access_token'
-    }, function (res) {
-        if(!res || res.error) {
-            console.log(!res ? 'error occurred' : res.error);
-            return;
-        }
-        var accessToken = res.access_token;
-        pushUserInNeed(fbid, accessToken);
-    });
-}
-
-function pushUserInNeed(fbid, accessToken) {
+function pushUserInNeed(fbid) {
 
     var databaseRef = getDatabaseRef();
     var newUserRef = databaseRef.push();
 
-    FB.setAccessToken(accessToken);
-
+    // get facebook name from id
     FB.api(fbid, {
-        fields: ['id', 'name'],
-        accessToken: accessToken
+        client_id: config.fbAppId,
+        client_secret: config.fbAppSecret,
+        access_token: config.fbPageAccessToken
     }, function (res) {
         if(!res || res.error) {
             console.log(!res ? 'error occurred' : res.error);
             return;
         }
-        console.log(res.id);
-        console.log(res.name);
+        // post user
+        var name = res.first_name + ' ' + res.last_name;
+        newUserRef.set({
+            'name': name,
+            'fbid': fbid
+        });
     });
-
-    newUserRef.set({
-        'fbid': fbid
-    });
-
-    var path = newUserRef.toString();
-    console.log("new user path:", path);
 }

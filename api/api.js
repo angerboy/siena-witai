@@ -9,9 +9,11 @@ module.exports = {
 };
 
 function accessAPI(data) {
+    console.log("siena query: ", data);
     const responseType = {
         responseContentType: 'application/json'
     };
+
     return new Promise(function(resolve, reject) {
         var client = new swagger({
             url: config.sienaAILayerEndpoint,

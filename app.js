@@ -16,5 +16,4 @@ app.post('/message', receive.receivedMessageFromMessenger);
 
 app.listen(app.get('port'), function () {
     console.log('Node app listening on port ', app.get('port'));
-    firebase.getFacebookAccessTokenAndRetrieveName('1052866811462288');
 });

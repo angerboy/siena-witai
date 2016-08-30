@@ -15,7 +15,8 @@
     "fb": "^1.1.1",
     "firebase": "^3.3.0",
     "node-wit": "^4.1.0",
-    "sessions": "0.0.2-7"
+    "sessions": "0.0.2-7",
+    "swagger-client": "^2.1.18"
   },
   "engines": {
     "node": "~6.3.0"
