@@ -17,8 +17,12 @@ module.exports = {
  * @param res
  */
 function receivedMessageFromMessenger(req, res) {
+    // Check if the user sent a postback
+    if(req.body.postback) {
+        witai.callWitAI(req.body.sender.id, req.body.postback.payload);
+    }
     // Make sure the user message is not profane
-    if(!swearjar.profane(req.body.message.text)) {
+    else if(!swearjar.profane(req.body.message.text)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
         if(!(req.body.sender.id == config.chatbotFacebookId)) {
             console.log('USER MESSAGE: ', req.body.message.text);
@@ -27,7 +31,7 @@ function receivedMessageFromMessenger(req, res) {
         }
     }
     else {
-        // If it is shame them!
+        // If the user was profane shame them!
         let query = {
             intent: "shame",
             detail: "none",

@@ -5,10 +5,11 @@ var FB = require('fb');
 const config = require('../config/default.json');
 
 module.exports = {
-    pushUserInNeed:pushUserInNeed
+    pushUserInNeed:pushUserInNeed,
+    initializeApp: initializeApp
 };
 
-function getDatabaseRef() {
+function initializeApp() {
     var config = {
         apiKey: "AIzaSyA2tsbRsa1xG6zbSO7Kuw0_X4jy6qD2Z_M",
         authDomain: "siena-dashboard.firebaseapp.com",
@@ -17,11 +18,17 @@ function getDatabaseRef() {
     };
 
     firebase.initializeApp(config);
+}
+
+function getDatabaseRef() {
+
     var database = firebase.database().ref('user_list');
     return database;
 }
 
 function pushUserInNeed(fbid) {
+
+    console.log("facebook id: ", fbid);
 
     var databaseRef = getDatabaseRef();
     var newUserRef = databaseRef.push();

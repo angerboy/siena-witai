@@ -4,6 +4,7 @@ const session = require('../sessions/sessions');
 const api = require('../api/api');
 const actionUtils = require('../utils/wit-utils');
 const sendModule = require('../messages/send');
+const firebase = require('../firebase/firebase');
 
 const firstEntityValue = (entities, entity) => {
     const val = entities && entities[entity] &&
@@ -25,7 +26,9 @@ const actions = {
     getSocial: getSocial,
     getDemo: getDemo,
     getGreeting: getGreeting,
-    getJoke: getJoke
+    getJoke: getJoke,
+    getLocate: getLocate,
+    getDashboard: getDashboard
 }
 
 module.exports = {
@@ -234,6 +237,7 @@ function getLocate({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    return Promise.resolve(context);
 }
 
 /**
@@ -245,6 +249,8 @@ function getLocate({sessionId, context, text, entities}) {
  */
 function getDashboard({sessionId, context, text, entities}) {
     console.log("get dashboard");
+    firebase.pushUserInNeed(context.fbid);
+    return Promise.resolve(context);
 }
 
 /**

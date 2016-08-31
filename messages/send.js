@@ -27,6 +27,7 @@ function sendResponseToChatbot(messageData) {
 
 function buildChatbotResponseFromSienaResponse(data, context) {
     const response = data.data || {};
+    console.log("SIENA RESPONSE: ", response);
     const responseText = response.chatbotText || response.displayText || "";
     const cards = response.cards;
     console.log("RESPONSE TEXT: ", responseText);
@@ -34,8 +35,13 @@ function buildChatbotResponseFromSienaResponse(data, context) {
     console.log(cards);
     if(cards) {
         sendCardMessage(context.fbid, cards);
+        sendTextMessage(context.fbid, responseText);
+    } else if(response.buttons) {
+        const buttons = response.buttons;
+        sendTextAndButtonsMessage(context.fbid, responseText, buttons);
+    } else {
+        sendTextMessage(context.fbid, responseText);
     }
-    sendTextMessage(context.fbid, responseText);
 }
 
 function sendTextMessage(recipientId, messageText) {
@@ -66,6 +72,26 @@ function sendCardMessage(fbid, cards) {
             }
         }
     };
+    sendResponseToChatbot(messageData);
+}
+
+function sendTextAndButtonsMessage(recipientId, messageText, buttonData) {
+    let messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "button",
+                    text: messageText || "",
+                    buttons: generateButtons(buttonData)
+                }
+            }
+        }
+    };
+
     sendResponseToChatbot(messageData);
 }
 
