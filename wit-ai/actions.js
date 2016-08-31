@@ -237,6 +237,10 @@ function getLocate({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+
+    const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    callSiena(witResponse, context);
+
     return Promise.resolve(context);
 }
 
