@@ -261,6 +261,9 @@ function getDashboard({sessionId, context, text, entities}) {
  * @param entities
  */
 function getPin({sessionId, context, text, entities}) {
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
     console.log("get pin");
     let query = {
         intent: "pin",
