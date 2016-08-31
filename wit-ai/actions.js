@@ -184,6 +184,16 @@ function getDemo({sessionId, context, text, entities}) {
         const witResponse = actionUtils.generateSienaAIQuery(entities, context);
         callSiena(witResponse, context);
     }
+    else {
+        let query = {
+            intent: "demo",
+            detail: "none",
+            keyword: [],
+            time: "",
+            name: ""
+        }
+        callSiena(query, context);
+    }
     return Promise.resolve(context);
 }
 
