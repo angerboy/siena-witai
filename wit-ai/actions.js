@@ -47,11 +47,20 @@ function getActions() {
  * @param text
  */
 function send(request, response) {
-    // find facebook id
-    // send message
     console.log('Our bot wants to talk!');
-    // console.log(request);
-    // console.log(response);
+
+    // User entered their pin we think
+    if(!isNan(request.text)) {
+        let data = {
+            intent: "pin",
+            detail: "none",
+            keyword: [],
+            time: "",
+            name: ""
+        }
+        data.keyword.push(request.text);
+        console.log("REQUEST: ", request);
+    }
 
     return new Promise(function(resolve, reject) {
         // console.log('user said...', request.text);
