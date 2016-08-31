@@ -2,6 +2,7 @@
 
 const sessions = require('../sessions/sessions');
 const witai = require('../wit-ai/wit-ai.js');
+const config = require('../config/default.json');
 
 module.exports = {
     receivedMessageFromMessenger: receivedMessageFromMessenger,
@@ -14,13 +15,13 @@ module.exports = {
  * @param res
  */
 function receivedMessageFromMessenger(req, res) {
-    console.log("received message from bot");
-    // retrieve context from Dynamo, or create new
-    console.log('event: ', req.body);
-    //var session = sessions.findOrCreateSession(req.body.sender.id);
-
-    //call wit
-    witai.callWitAI(req.body.sender.id, req.body.message.text);
+    // Work around for chatbot bug - check if the message is from the chatbot itself
+    if(!(req.body.sender.id == config.chatbotFacebookId)) {
+        console.log('USER MESSAGE: ', req.body.message.text);
+        console.log('FROM: ', req.body.sender.id);
+        witai.callWitAI(req.body.sender.id, req.body.message.text);
+    }
+    res.sendStatus(200);
 }
 
 /**

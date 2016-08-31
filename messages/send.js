@@ -9,7 +9,7 @@ module.exports = {
 }
 
 function sendResponseToChatbot(messageData) {
-    console.log("send to chatbot");
+    console.log("SENDING TO CHATBOT: ", messageData.message.text);
     request({
         uri: config.chatbotLayerEndpoint,
         method: 'POST',
@@ -26,21 +26,19 @@ function sendResponseToChatbot(messageData) {
 }
 
 function buildChatbotResponseFromSienaResponse(data, context) {
-    console.log("build that response from wit response");
     const response = data.data || {};
     const responseText = response.chatbotText || response.displayText || "";
     const cards = response.cards;
+    console.log("RESPONSE TEXT: ", responseText);
+    console.log("RESPONSE CARDS: ", cards);
     console.log(cards);
     if(cards) {
-        console.log("send cards");
         sendCardMessage(context.fbid, cards);
     }
-    console.log("fbid: ", context.fbid);
     sendTextMessage(context.fbid, responseText);
 }
 
 function sendTextMessage(recipientId, messageText) {
-    console.log("send text message with: ", recipientId + " " + messageText);
     let messageData = {
         recipient: {
             id: recipientId

@@ -29,10 +29,10 @@ function callWitAI(facebookID, text) {
         text,
         session.context
     ).then((context) => {
-        console.log('Waiting for next user messages...');
-        console.log(context);
-        session.context = context;
-        sessions.setSession(context);
+        console.log('FINISHED WIT ACTIONS *************');
+        //console.log(context);
+        //session.context = context;
+        //sessions.setSession(context);
     })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);

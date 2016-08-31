@@ -6,22 +6,32 @@ module.exports = {
     generateSienaAIQuery:generateSienaAIQuery
 };
 
-function generateSienaAIQuery(entities, intent, context) {
+function generateSienaAIQuery(entities, context) {
     let data = {
-        intent: intent,
+        intent: "",
         detail: "none",
         keyword: [],
         time: "",
         name: ""
     }
-
+    console.log(entities.intent);
+    if(entities.intent) {
+        data.intent = entities.intent[0].value.toLowerCase();
+    }
+    if(context.name) {
+        data.name = context.name.toLowerCase();
+    }
     if(context.detail) {
         data.detail = context.detail.toLowerCase();
     }
     if(entities.keyword) {
+        console.log(entities.keyword);
         entities.keyword.forEach(function(keyword) {
             data.keyword.push(keyword.value.toLowerCase());
         });
+    }
+    if(context.keyword) {
+        data.keyword.push(context.keyword);
     }
 
     return data;
