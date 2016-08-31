@@ -29,7 +29,8 @@ const actions = {
 }
 
 module.exports = {
-    getActions: getActions
+    getActions: getActions,
+    callSiena: callSiena
 };
 
 function getActions() {
@@ -205,7 +206,7 @@ function getGreeting({sessionId, context, text, entities}) {
 }
 
 /**
- * Handlles the getJoke intent
+ * Handles the getJoke intent
  * @param sessionId
  * @param context
  * @param text
@@ -219,6 +220,31 @@ function getJoke({sessionId, context, text, entities}) {
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     callSiena(witResponse, context);
     return Promise.resolve(context);
+}
+
+/**
+ * Handles the locate intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getLocate({sessionId, context, text, entities}) {
+    console.log("get locate");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+}
+
+/**
+ * Handles the get dashboard intent. Send user to the dashboard
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getDashboard({sessionId, context, text, entities}) {
+    console.log("get dashboard");
 }
 
 /**
