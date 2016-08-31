@@ -271,6 +271,7 @@ function getPin({sessionId, context, text, entities}) {
     }
     console.log(query);
     callSiena(query, context);
+    return Promise.resolve(context);
 }
 
 /**
