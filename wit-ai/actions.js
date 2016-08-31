@@ -28,7 +28,8 @@ const actions = {
     getGreeting: getGreeting,
     getJoke: getJoke,
     getLocate: getLocate,
-    getDashboard: getDashboard
+    getDashboard: getDashboard,
+    getPin: getPin
 }
 
 module.exports = {
@@ -47,21 +48,7 @@ function getActions() {
  * @param text
  */
 function send(request, response) {
-    console.log('Our bot wants to talk!');
-
-    // User entered their pin we think
-    if(!isNan(request.text)) {
-        let data = {
-            intent: "pin",
-            detail: "none",
-            keyword: [],
-            time: "",
-            name: ""
-        }
-        data.keyword.push(request.text);
-        console.log("REQUEST: ", request);
-    }
-
+    console.log('Our bot is very very confused');
     return new Promise(function(resolve, reject) {
         // console.log('user said...', request.text);
         // console.log('sending...', JSON.stringify(response));
@@ -264,6 +251,26 @@ function getDashboard({sessionId, context, text, entities}) {
     console.log("get dashboard");
     firebase.pushUserInNeed(context.fbid);
     return Promise.resolve(context);
+}
+
+/**
+ * Handles the get pin intent. This will kick off the networking flow
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getPin({sessionId, context, text, entities}) {
+    console.log("get pin");
+    let query = {
+        intent: "pin",
+        detail: "none",
+        keyword: [text],
+        time: "",
+        name: ""
+    }
+    console.log(query);
+    callSiena(query, context);
 }
 
 /**
