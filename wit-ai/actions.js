@@ -177,9 +177,10 @@ function getDemo({sessionId, context, text, entities}) {
     const demo_type = firstEntityValue(entities, 'demo_type');
     if(demo_type) {
         context.keyword = demo_type;
+        const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+        callSiena(witResponse, context);
     }
-    if(entities.keyword[0].value || demo_type) {
-        console.log(`Updated entities: ${JSON.stringify(entities)}`);
+    else if(entities.keyword) {
         const witResponse = actionUtils.generateSienaAIQuery(entities, context);
         callSiena(witResponse, context);
     }
