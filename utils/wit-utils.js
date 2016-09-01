@@ -7,6 +7,7 @@ module.exports = {
 };
 
 function generateSienaAIQuery(entities, context) {
+    console.log("CONTEXT TO PASS: ", context);
     let data = {
         intent: "",
         detail: "none",
