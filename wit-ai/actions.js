@@ -50,7 +50,8 @@ function getActions() {
  * @param text
  */
 function send(request, response) {
-    console.log('Our bot is very very confused');
+    console.log('No intent detected');
+    console.log("REQUEST BODY: ", request.body)
     return new Promise(function(resolve, reject) {
         // console.log('user said...', request.text);
         // console.log('sending...', JSON.stringify(response));
