@@ -24,6 +24,10 @@ function generateSienaAIQuery(entities, context) {
     if(context.detail) {
         data.detail = context.detail.toLowerCase();
     }
+    if(context.time) {
+        const date = new Date(context.time);
+        data.time = date.getTime();
+    }
     if(entities.keyword) {
         console.log(entities.keyword);
         entities.keyword.forEach(function(keyword) {

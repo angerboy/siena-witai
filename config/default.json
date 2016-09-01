@@ -4,6 +4,6 @@
     "fbAppId": "613158658850207",
     "fbAppSecret": "c17851ecdbd9cff399754bb71e965077",
     "fbPageAccessToken": "EAAItqiANPZA8BAI5id7BV4Sl7F5T5lRdecM2qMERvn5RH4av52lChnoiGEIPbZA5jCVneVP7zOZBGfPl54veEZBcbvYPwSbsZAZBbfZBfDYvv0JE4vQcZBZAre8G8i1BVpZAsu2BlFsSTZCHFTl9heHuVARlQ9ryNr4TM1hJmK7uQFJ2P8PcOLKGX0L",
-    "chatbotLayerEndpoint":"https://siena-messenger.herokuapp.com/speak",
+    "chatbotLayerEndpoint":"http://localhost:5000/speak",
     "chatbotFacebookId": "240152909704963"
 }

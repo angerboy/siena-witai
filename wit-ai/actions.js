@@ -29,8 +29,8 @@ const actions = {
     getJoke: getJoke,
     getLocate: getLocate,
     getDashboard: getDashboard,
-    getPin: getPin,
-    getEvent: getEvent
+    getEvent: getEvent,
+    getGif: getGif
 }
 
 module.exports = {
@@ -107,8 +107,20 @@ function getTalk({sessionId, context, text, entities}) {
     console.log("get talk");
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
+    const contact = firstEntityValue(entities, 'contact');
+    const keyword = firstEntityValue(entities, 'keyword');
+    const time = firstEntityValue(entities, 'datetime');
     if(detail) {
         context.detail = detail;
+    }
+    if(contact) {
+        context.name = contact;
+    }
+    if(keyword) {
+        context.keyword = keyword;
+    }
+    if(time) {
+        context.time = time;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     callSiena(witResponse, context);
@@ -127,11 +139,15 @@ function getTopic({sessionId, context, text, entities}) {
     console.log("get topic");
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
+    const time = firstEntityValue(entities, 'datetime');
     if(detail) {
         context.detail = detail;
-        const witResponse = actionUtils.generateSienaAIQuery(entities, context);
-        callSiena(witResponse, context);
     }
+    if(time) {
+        context.time = time;
+    }
+    const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -150,11 +166,15 @@ function getSocial({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
     const socialEvent = firstEntityValue(entities, 'socialEvent');
+    const time = firstEntityValue(entities, 'datetime');
     if(detail) {
         context.detail = detail;
     }
     if(socialEvent) {
         context.keyword = socialEvent;
+    }
+    if(time) {
+        context.time = time;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     callSiena(witResponse, context);
@@ -175,20 +195,14 @@ function getDemo({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
 
-    const demo_type = firstEntityValue(entities, 'demo_type');
-    if(demo_type) {
-        context.keyword = demo_type;
-        const witResponse = actionUtils.generateSienaAIQuery(entities, context);
-        callSiena(witResponse, context);
-    }
-    else if(entities.keyword) {
+    if(entities.keyword) {
         const witResponse = actionUtils.generateSienaAIQuery(entities, context);
         callSiena(witResponse, context);
     }
     else {
         let query = {
             intent: "demo",
-            detail: "none",
+            detail: "all",
             keyword: [],
             time: "",
             name: ""
@@ -264,29 +278,30 @@ function getDashboard({sessionId, context, text, entities}) {
     return Promise.resolve(context);
 }
 
-/**
- * Handles the get pin intent. This will kick off the networking flow
- * @param sessionId
- * @param context
- * @param text
- * @param entities
- */
-function getPin({sessionId, context, text, entities}) {
-    console.log(`Session ${sessionId} received ${text}`);
-    console.log(`The current context is ${JSON.stringify(context)}`);
-    console.log(`Wit extracted ${JSON.stringify(entities)}`);
-    console.log("get pin");
-    let query = {
-        intent: "pin",
-        detail: "none",
-        keyword: [text],
-        time: "",
-        name: ""
-    }
-    console.log(query);
-    callSiena(query, context);
-    return Promise.resolve(context);
-}
+// /**
+//  * Handles the get pin intent. This will kick off the networking flow
+//  * @param sessionId
+//  * @param context
+//  * @param text
+//  * @param entities
+//  */
+// function getPin({sessionId, context, text, entities}) {
+//     console.log("get pin");
+//     console.log(`Session ${sessionId} received ${text}`);
+//     console.log(`The current context is ${JSON.stringify(context)}`);
+//     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+//
+//     const pin = firstEntityValue(entities, 'pin_number');
+//     if(pin) {
+//         console.log("we received a pin")
+//         context.keyword = pin;
+//         var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+//         witResponse.intent = 'pin';
+//         callSiena(witResponse, context);
+//     }
+//
+//     return Promise.resolve(context);
+// }
 
 /**
  * Handles the get Event intent. This is a callback if wit misses get Social or get Talk
@@ -302,14 +317,33 @@ function getEvent({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
 
     const detail = firstEntityValue(entities, 'detail');
-    console.log("DETAIL: ", detail);
+    const time = firstEntityValue(entities, 'datetime');
     if(detail) {
         context.detail = detail;
+    }
+    if(time) {
+        context.time = time;
     }
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     callSiena(witResponse, context);
 
+    return Promise.resolve(context);
+}
+
+
+/**
+ * Handle get gif intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getGif({sessionId, context, text, entities}) {
+    console.log("get gif");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
     return Promise.resolve(context);
 }
 
