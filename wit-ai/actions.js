@@ -108,16 +108,12 @@ function getTalk({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
     const contact = firstEntityValue(entities, 'contact');
-    const keyword = firstEntityValue(entities, 'keyword');
     const time = firstEntityValue(entities, 'datetime');
     if(detail) {
         context.detail = detail;
     }
     if(contact) {
         context.name = contact;
-    }
-    if(keyword) {
-        context.keyword = keyword;
     }
     if(time) {
         context.time = time;
