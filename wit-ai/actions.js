@@ -30,7 +30,8 @@ const actions = {
     getLocate: getLocate,
     getDashboard: getDashboard,
     getEvent: getEvent,
-    getGif: getGif
+    getGif: getGif,
+    getHelp: getHelp
 }
 
 module.exports = {
@@ -340,6 +341,29 @@ function getGif({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    return Promise.resolve(context);
+}
+
+/**
+ * Handles the get help intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getHelp({sessionId, context, text, entities}) {
+    console.log("get help");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    let query = {
+        intent: "help",
+        detail: "",
+        keyword: [],
+        time: "",
+        name: ""
+    };
+    callSiena(query, context);
     return Promise.resolve(context);
 }
 

@@ -37,7 +37,6 @@ function generateSienaAIQuery(entities, context) {
     if(context.keyword) {
         data.keyword.push(context.keyword);
     }
-    console.log("SIENA QUERY: ", data);
 
     return data;
 }
