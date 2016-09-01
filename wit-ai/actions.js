@@ -302,6 +302,7 @@ function getEvent({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
 
     const detail = firstEntityValue(entities, 'detail');
+    console.log("DETAIL: ", detail);
     if(detail) {
         context.detail = detail;
     }

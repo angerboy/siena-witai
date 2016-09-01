@@ -10,12 +10,11 @@ function generateSienaAIQuery(entities, context) {
     console.log("CONTEXT TO PASS: ", context);
     let data = {
         intent: "",
-        detail: "none",
+        detail: "",
         keyword: [],
         time: "",
         name: ""
     };
-    console.log(entities.intent);
     if(entities.intent) {
         data.intent = entities.intent[0].value.toLowerCase();
     }
