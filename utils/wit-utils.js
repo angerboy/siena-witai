@@ -14,7 +14,7 @@ function generateSienaAIQuery(entities, context) {
         keyword: [],
         time: "",
         name: ""
-    }
+    };
     console.log(entities.intent);
     if(entities.intent) {
         data.intent = entities.intent[0].value.toLowerCase();
@@ -34,6 +34,7 @@ function generateSienaAIQuery(entities, context) {
     if(context.keyword) {
         data.keyword.push(context.keyword);
     }
+    console.log("SIENA QUERY: ", data);
 
     return data;
 }
