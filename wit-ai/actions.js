@@ -29,7 +29,8 @@ const actions = {
     getJoke: getJoke,
     getLocate: getLocate,
     getDashboard: getDashboard,
-    getPin: getPin
+    getPin: getPin,
+    getEvent: getEvent
 }
 
 module.exports = {
@@ -284,6 +285,30 @@ function getPin({sessionId, context, text, entities}) {
     }
     console.log(query);
     callSiena(query, context);
+    return Promise.resolve(context);
+}
+
+/**
+ * Handles the get Event intent. This is a callback if wit misses get Social or get Talk
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getEvent({sessionId, context, text, entities}) {
+    console.log("get event");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+
+    const detail = firstEntityValue(entities, 'detail');
+    if(detail) {
+        context.detail = detail;
+    }
+
+    const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    callSiena(witResponse, context);
+
     return Promise.resolve(context);
 }
 
