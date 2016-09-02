@@ -52,7 +52,7 @@ function callWitAIWithRes(res, text) {
     ).then((context) => {
         //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
         console.log("FINAL CONTEXT: ", context);
-        res.send(context.name);
+        res.send(context.query);
     })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);

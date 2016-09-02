@@ -76,6 +76,7 @@ function getPerson({sessionId, context, text, entities}) {
         context.name = contact;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
