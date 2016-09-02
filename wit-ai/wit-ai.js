@@ -5,6 +5,7 @@ const log = require('node-wit').log;
 const sessions = require('../sessions/sessions');
 const config = require('../config/default.json');
 const actions = require('./actions').getActions();
+const api = require('../api/api');
 
 const wit = new Wit({
     accessToken: config.witAccessToken,
@@ -51,7 +52,6 @@ function callWitAIWithRes(res, text) {
         session.context
     ).then((context) => {
         //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
-        res.send(context.query);
         api.accessAPI(context.query)
             .then(function(data) {
                 res.send(data);
