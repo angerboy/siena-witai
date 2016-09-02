@@ -5,7 +5,8 @@ module.exports = {
     sendResponseToChatbot: sendResponseToChatbot,
     sendTextMessage: sendTextMessage,
     sendCardMessage: sendCardMessage,
-    buildChatbotResponseFromSienaResponse: buildChatbotResponseFromSienaResponse
+    buildChatbotResponseFromSienaResponse: buildChatbotResponseFromSienaResponse,
+    buildResponseForPepper: buildResponseForPepper
 }
 
 function sendResponseToChatbot(messageData) {
@@ -23,6 +24,55 @@ function sendResponseToChatbot(messageData) {
             console.error(error);
         }
     });
+}
+
+/**
+ * Build a response for Pepper
+ * @param data
+ * @returns {*}
+ */
+function buildResponseForPepper(data) {
+    const response = data.data || {};
+    const responseText = response.chatbotText || response.displayText || "";
+    const cards = response.cards;
+
+    if(cards) {
+        let messageData = {
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "generic",
+                        text: responseText || "",
+                        elements: generateCards(cards)
+                    }
+                }
+            }
+        };
+        return messageData;
+    }
+    else if(response.buttons) {
+        let messageData = {
+            message: {
+                attachment: {
+                    type: "template",
+                    payload: {
+                        template_type: "button",
+                        text: responseText || "",
+                        buttons: generateButtons(response.buttons)
+                    }
+                }
+            }
+        };
+        return messageData;
+    } else {
+        let messageData = {
+            message: {
+                text: responseText
+            }
+        };
+        return messageData;
+    }
 }
 
 function buildChatbotResponseFromSienaResponse(data, context) {

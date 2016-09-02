@@ -6,6 +6,7 @@ const sessions = require('../sessions/sessions');
 const config = require('../config/default.json');
 const actions = require('./actions').getActions();
 const api = require('../api/api');
+const sendModule = require('../messages/send');
 
 const wit = new Wit({
     accessToken: config.witAccessToken,
@@ -54,7 +55,7 @@ function callWitAIWithRes(res, text) {
         //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
         api.accessAPI(context.query)
             .then(function(data) {
-                res.send(data);
+                res.send(sendModule.buildResponseForPepper(data));
             });
     })
         .catch((err) => {
