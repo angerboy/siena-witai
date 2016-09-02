@@ -51,8 +51,11 @@ function callWitAIWithRes(res, text) {
         session.context
     ).then((context) => {
         //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
-        console.log("FINAL CONTEXT: ", context);
         res.send(context.query);
+        api.accessAPI(context.query)
+            .then(function(data) {
+                res.send(data);
+            });
     })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);
