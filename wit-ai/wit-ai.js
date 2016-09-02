@@ -52,7 +52,7 @@ function callWitAIWithRes(res, text) {
         text,
         session.context
     ).then((context) => {
-        //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
+        console.log('Siena Query: ', context.query);
         api.accessAPI(context.query)
             .then(function(data) {
                 res.send(sendModule.buildResponseForPepper(data));
