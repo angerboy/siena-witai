@@ -395,13 +395,11 @@ function getThanks({sessionId, context, text, entities}) {
  * @param query
  */
 function callSiena(query, context) {
-
     console.log("CONTEXT IN CALL SIENA: ", context);
-
-    // api.accessAPI(query)
-    //     .then(function(data) {
-    //         sendModule.buildChatbotResponseFromSienaResponse(data, context);
-    //     });
+    api.accessAPI(query)
+        .then(function(data) {
+            sendModule.buildChatbotResponseFromSienaResponse(data, context);
+        });
 }
 
 
