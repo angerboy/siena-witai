@@ -21,14 +21,11 @@ function initializeApp() {
 }
 
 function getDatabaseRef() {
-
     var database = firebase.database().ref('user_list');
     return database;
 }
 
 function pushUserInNeed(fbid) {
-
-    console.log("facebook id: ", fbid);
 
     var databaseRef = getDatabaseRef();
     var newUserRef = databaseRef.push();

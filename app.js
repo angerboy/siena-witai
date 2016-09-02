@@ -14,6 +14,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.post('/message', receive.receivedMessageFromMessenger);
+app.post('/accesswit', receive.receivedInputFromClient)
 app.post('/postback', receive.receivedPostbackFromMessenger);
 
 app.listen(app.get('port'), function () {

@@ -9,7 +9,8 @@ const actions = require('../wit-ai/actions');
 
 module.exports = {
     receivedMessageFromMessenger: receivedMessageFromMessenger,
-    receivedPostbackFromMessenger: receivedPostbackFromMessenger
+    receivedPostbackFromMessenger: receivedPostbackFromMessenger,
+    receivedInputFromClient: receivedInputFromClient
 };
 
 /**
@@ -28,27 +29,6 @@ function receivedMessageFromMessenger(req, res) {
         if(!(req.body.sender.id == config.chatbotFacebookId)) {
             console.log('USER MESSAGE: ', req.body.message.text);
             console.log('FROM: ', req.body.sender.id);
-
-            // const messageText = req.body.message.text;
-            // const messageAttachments = req.body.message.attachments;
-
-            // if (messageText) {
-            //     if(inputUtils.detectedEmoji(messageText)) {
-            //         const newMessageText = inputUtils.parseEmoji(messageText);
-            //         wit.callWitAI(senderID, newMessageText);
-            //     } else {
-            //         wit.callWitAI(senderID, messageText);
-            //     }
-            // } else if (messageAttachments) {
-            //     if(inputUtils.detectedGif(messageAttachments[0])) {
-            //         send.sendImageMessage(senderID, constants.getGif());
-            //     } else {
-            //         send.sendTextMessage(senderID, "Two can play that game!");
-            //         send.sendImageMessage(senderID, inputUtils.getAttachmentUrl(messageAttachments[0]));
-            //     }
-            //     console.log(messageAttachments);
-            // }
-
             witai.callWitAI(req.body.sender.id, req.body.message.text);
         }
     }
@@ -76,5 +56,15 @@ function receivedMessageFromMessenger(req, res) {
 function receivedPostbackFromMessenger(req, res) {
     console.log('received postback from bot');
     console.log('event payload: ', req.body.postback.payload);
+}
+
+/**
+ * Handles a POST from a client other than Messenger
+ * @param req
+ * @param res
+ */
+function receivedInputFromClient(req, res) {
+    console.log(req);
+    console.log(res);
 }
 

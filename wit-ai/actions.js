@@ -54,8 +54,8 @@ function send(request, response) {
     console.log('No intent detected');
     console.log("REQUEST BODY: ", request.body)
     return new Promise(function(resolve, reject) {
-        // console.log('user said...', request.text);
-        // console.log('sending...', JSON.stringify(response));
+        console.log('user said...', request.text);
+        console.log('sending...', JSON.stringify(response));
         return resolve();
     });
 }
@@ -160,8 +160,8 @@ function getTopic({sessionId, context, text, entities}) {
  */
 function getSocial({sessionId, context, text, entities}) {
     console.log("get social");
-    //console.log(`Session ${sessionId} received ${text}`);
-    //console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const detail = firstEntityValue(entities, 'detail');
     const socialEvent = firstEntityValue(entities, 'socialEvent');
