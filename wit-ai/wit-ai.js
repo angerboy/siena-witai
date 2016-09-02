@@ -44,7 +44,7 @@ function callWitAI(facebookID, text) {
  */
 function callWitAIWithRes(res, text) {
     var session = sessions.createSession();
-    session.context.res = res;
+    //session.context.res = res;
     wit.runActions(
         session.id,
         text,
