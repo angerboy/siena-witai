@@ -94,8 +94,8 @@ function getInfo({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
-
     return Promise.resolve(context);
 }
 
@@ -123,6 +123,7 @@ function getTalk({sessionId, context, text, entities}) {
         context.time = time;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
@@ -147,6 +148,7 @@ function getTopic({sessionId, context, text, entities}) {
         context.time = time;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
@@ -177,6 +179,7 @@ function getSocial({sessionId, context, text, entities}) {
         context.time = time;
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
@@ -197,6 +200,7 @@ function getDemo({sessionId, context, text, entities}) {
 
     if(entities.keyword) {
         const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+        context.query = witResponse;
         callSiena(witResponse, context);
     }
     else {
@@ -207,6 +211,7 @@ function getDemo({sessionId, context, text, entities}) {
             time: "",
             name: ""
         }
+        context.query = query;
         callSiena(query, context);
     }
     return Promise.resolve(context);
@@ -225,6 +230,7 @@ function getGreeting({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
@@ -242,6 +248,7 @@ function getJoke({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
     return Promise.resolve(context);
 }
@@ -260,6 +267,7 @@ function getLocate({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
 
     return Promise.resolve(context);
@@ -326,6 +334,7 @@ function getEvent({sessionId, context, text, entities}) {
     }
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     callSiena(witResponse, context);
 
     return Promise.resolve(context);
@@ -366,6 +375,7 @@ function getHelp({sessionId, context, text, entities}) {
         time: "",
         name: ""
     };
+    context.query = query;
     callSiena(query, context);
     return Promise.resolve(context);
 }
@@ -383,6 +393,7 @@ function getThanks({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const query = actionUtils.generateSienaAIQuery(entities,context);
+    context.query = query;
     callSiena(query, context);
     return Promise.resolve(context);
 }
