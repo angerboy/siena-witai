@@ -2,7 +2,8 @@
 
 module.exports = {
     findOrCreateSession: findOrCreateSession,
-    setSession: setSession
+    setSession: setSession,
+    createSession: createSession
 };
 
 
@@ -34,5 +35,18 @@ function findOrCreateSession(facebookID) {
 function setSession(session) {
     // send session to Dynamo
     console.log('set session');
+}
+
+/**
+ * Initalizes an empty session for the generic endpoint
+ */
+function createSession() {
+    var sessionId = new Data().toISOString();
+    var context = {};
+    let session = {
+        sessionId: sessionId,
+        context: context
+    }
+    return session;
 }
 

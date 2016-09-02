@@ -13,7 +13,8 @@ const wit = new Wit({
 });
 
 module.exports = {
-    callWitAI: callWitAI
+    callWitAI: callWitAI,
+    callWitAIWithRes: callWitAIWithRes
 };
 
 /**
@@ -30,6 +31,27 @@ function callWitAI(facebookID, text) {
         session.context
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
+    })
+        .catch((err) => {
+            console.error('Oops! Got an error from Wit: ', err.stack || err);
+        })
+}
+
+/**
+ * Send the input to Wit.Ai. This input comes from the generic endpoint, not Messenger.
+ * @param res
+ * @param text
+ */
+function callWitAIWithRes(res, text) {
+    var session = sessions.createSession();
+    session.context.res = res;
+    wit.runActions(
+        session.id,
+        text,
+        session.context
+    ).then((context) => {
+        console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
+        console.log("FINAL CONTEXT: ", context);
     })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);
