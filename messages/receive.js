@@ -66,7 +66,7 @@ function receivedPostbackFromMessenger(req, res) {
 function receivedInputFromClient(req, res) {
     console.log("Received input from client");
     //res.send("Received your input");
-    res.send("got it bro");
+    //res.send("got it bro");
     witai.callWitAIWithRes(res, req.body.message.text);
 }
 

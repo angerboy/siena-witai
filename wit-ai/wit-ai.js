@@ -50,8 +50,9 @@ function callWitAIWithRes(res, text) {
         text,
         session.context
     ).then((context) => {
-        console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
+        //console.log('FINISHED WIT ACTIONS FOR CLIENT *************');
         console.log("FINAL CONTEXT: ", context);
+        res.send(context.name);
     })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);
