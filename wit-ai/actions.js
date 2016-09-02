@@ -31,7 +31,8 @@ const actions = {
     getDashboard: getDashboard,
     getEvent: getEvent,
     getGif: getGif,
-    getHelp: getHelp
+    getHelp: getHelp,
+    getThanks: getThanks
 }
 
 module.exports = {
@@ -364,6 +365,23 @@ function getHelp({sessionId, context, text, entities}) {
         time: "",
         name: ""
     };
+    callSiena(query, context);
+    return Promise.resolve(context);
+}
+
+/**
+ * Handles the get thanks intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getThanks({sessionId, context, text, entities}) {
+    console.log("get thanks");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    const query = actionUtils.generateSienaAIQuery(entities,context);
     callSiena(query, context);
     return Promise.resolve(context);
 }
