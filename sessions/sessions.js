@@ -41,7 +41,7 @@ function setSession(session) {
  * Initalizes an empty session for the generic endpoint
  */
 function createSession() {
-    var sessionId = new Data().toISOString();
+    var sessionId = new Date().toISOString();
     var context = {};
     let session = {
         sessionId: sessionId,

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ff7ef3f-a7f6-4ad9-9ae7-683c66ac49f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/messages/receive.js" afterPath="$PROJECT_DIR$/messages/receive.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sessions/sessions.js" afterPath="$PROJECT_DIR$/sessions/sessions.js" />
     </list>
     <ignored path="witai.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,7 +25,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="wit-ai.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wit-ai.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-15">
@@ -35,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receive.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="receive.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/messages/receive.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="570">
@@ -48,8 +48,8 @@
       <file leaf-file-name="sessions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sessions/sessions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+            <state relative-caret-position="596">
+              <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -150,10 +150,10 @@
         <option value="$PROJECT_DIR$/config/default.json" />
         <option value="$PROJECT_DIR$/firebase/firebase.js" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/sessions/sessions.js" />
         <option value="$PROJECT_DIR$/wit-ai/wit-ai.js" />
         <option value="$PROJECT_DIR$/wit-ai/actions.js" />
         <option value="$PROJECT_DIR$/messages/receive.js" />
+        <option value="$PROJECT_DIR$/sessions/sessions.js" />
       </list>
     </option>
   </component>
@@ -380,12 +380,12 @@
       <workItem from="1472564264675" duration="16984000" />
       <workItem from="1472650718665" duration="21211000" />
       <workItem from="1472688571664" duration="13527000" />
-      <workItem from="1472822845200" duration="9160000" />
+      <workItem from="1472822845200" duration="9265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104488000" />
+    <option name="totallyTimeSpent" value="104593000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-640" y="-1057" width="1920" height="997" extended-state="0" />
@@ -742,22 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sessions/sessions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -782,10 +766,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sessions/sessions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="596">
+          <caret line="50" column="1" selection-start-line="50" selection-start-column="1" selection-end-line="50" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/messages/receive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
           <caret line="68" column="27" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
           <folding />
         </state>
       </provider>
