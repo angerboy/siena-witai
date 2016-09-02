@@ -66,5 +66,6 @@ function receivedPostbackFromMessenger(req, res) {
 function receivedInputFromClient(req, res) {
     console.log(req);
     console.log(res);
+    res.sendStatus(200);
 }
 
