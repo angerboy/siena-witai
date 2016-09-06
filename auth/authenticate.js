@@ -29,7 +29,7 @@ function getFacebookID(fbid) {
         else {
             console.log("AUTHENTICATION GET RESPONSE");
             console.log(body);
-            return body.data.authenticated;
+            return body;
         }
     });
 }
