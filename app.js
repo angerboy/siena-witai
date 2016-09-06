@@ -13,9 +13,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.post('/message', receive.receivedMessageFromMessenger);
-app.post('/accesswit', receive.receivedInputFromClient)
-app.post('/postback', receive.receivedPostbackFromMessenger);
+app.post('/message', receive.receivedMessage);
 
 app.listen(app.get('port'), function () {
     console.log('Node app listening on port ', app.get('port'));

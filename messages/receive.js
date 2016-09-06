@@ -5,31 +5,30 @@ const witai = require('../wit-ai/wit-ai.js');
 const config = require('../config/default.json');
 const swearjar = require('swearjar');
 const actions = require('../wit-ai/actions');
-//const inputUtils = require('../utils/input-utils');
+const api = require('../api/api');
 
 module.exports = {
-    receivedMessageFromMessenger: receivedMessageFromMessenger,
-    receivedPostbackFromMessenger: receivedPostbackFromMessenger,
-    receivedInputFromClient: receivedInputFromClient
+    receivedMessage: receivedMessage
 };
 
 /**
- * handle message from user
+ * Handle message from a client
  * @param req
  * @param res
  */
-function receivedMessageFromMessenger(req, res) {
-    // Check if the user sent a postback
-    if(req.body.postback) {
-        witai.callWitAI(req.body.sender.id, req.body.postback.payload);
-    }
+function receivedMessage(req, res) {
+
     // Make sure the user message is not profane
-    else if(!swearjar.profane(req.body.message.text)) {
+    if(!swearjar.profane(req.body.message.text)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
-        if(!(req.body.sender.id == config.chatbotFacebookId)) {
+        if(!(req.body.sender)) {
+            console.log('USER MESSAGE: ', req.body.message.text);
+            witai.callWitAI(req, res);
+        }
+        else if(!(req.body.sender.id == config.chatbotFacebookId)) {
             console.log('USER MESSAGE: ', req.body.message.text);
             console.log('FROM: ', req.body.sender.id);
-            witai.callWitAI(req.body.sender.id, req.body.message.text);
+            witai.callWitAI(req, res);
         }
     }
     else {
@@ -42,31 +41,12 @@ function receivedMessageFromMessenger(req, res) {
             name: ""
         }
         var context = {};
-        context.fbid = req.body.sender.id;
-        actions.callSiena(query, context);
+        if(req.body.sender.id) {
+            context.fbid = req.body.sender.id;
+        }
+        api.accessAPI(query)
+            .then(function(data) {
+                res.send(data);
+            });
     }
-    res.sendStatus(200);
 }
-
-/**
- * handle postback from user
- * @param req
- * @param res
- */
-function receivedPostbackFromMessenger(req, res) {
-    console.log('received postback from bot');
-    console.log('event payload: ', req.body.postback.payload);
-}
-
-/**
- * Handles a POST from a client other than Messenger
- * @param req
- * @param res
- */
-function receivedInputFromClient(req, res) {
-    console.log("Received input from client");
-    //res.send("Received your input");
-    //res.send("got it bro");
-    witai.callWitAIWithRes(res, req.body.message.text);
-}
-

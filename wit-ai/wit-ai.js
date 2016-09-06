@@ -6,7 +6,6 @@ const sessions = require('../sessions/sessions');
 const config = require('../config/default.json');
 const actions = require('./actions').getActions();
 const api = require('../api/api');
-const sendModule = require('../messages/send');
 
 const wit = new Wit({
     accessToken: config.witAccessToken,
@@ -15,8 +14,7 @@ const wit = new Wit({
 });
 
 module.exports = {
-    callWitAI: callWitAI,
-    callWitAIWithRes: callWitAIWithRes
+    callWitAI: callWitAI
 };
 
 /**
@@ -24,38 +22,38 @@ module.exports = {
  * @param facebookID
  * @param text
  */
-function callWitAI(facebookID, text) {
-    const session = sessions.findOrCreateSession(facebookID);
-    session.context.fbid = facebookID;
+function callWitAI(req, res) {
+
+    var session;
+
+    // Handle session context only for facebook users
+    if(req.body.sender) {
+        session = sessions.findOrCreateSession(req.body.sender.id);
+        session.context.fbid = req.body.sender.id; // Do we need this????
+    }
+    else {
+        session = sessions.createSession();
+    }
+
+    var text;
+
+    // Check for postback from user
+    if(req.body.postback) {
+        text = req.body.postback.payload;
+    }
+    else {
+        text = req.body.message.text;
+    }
+
     wit.runActions(
         session.id,
         text,
         session.context
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
-    })
-        .catch((err) => {
-            console.error('Oops! Got an error from Wit: ', err.stack || err);
-        })
-}
-
-/**
- * Send the input to Wit.Ai. This input comes from the generic endpoint, not Messenger.
- * @param res
- * @param text
- */
-function callWitAIWithRes(res, text) {
-    var session = sessions.createSession();
-    //session.context.res = res;
-    wit.runActions(
-        session.id,
-        text,
-        session.context
-    ).then((context) => {
-        console.log('Siena Query: ', context.query);
         api.accessAPI(context.query)
             .then(function(data) {
-                res.send(sendModule.buildResponseForPepper(data));
+                res.send(data);
             });
     })
         .catch((err) => {

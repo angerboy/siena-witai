@@ -3,7 +3,6 @@
 const session = require('../sessions/sessions');
 const api = require('../api/api');
 const actionUtils = require('../utils/wit-utils');
-const sendModule = require('../messages/send');
 const firebase = require('../firebase/firebase');
 
 const firstEntityValue = (entities, entity) => {
@@ -36,8 +35,7 @@ const actions = {
 }
 
 module.exports = {
-    getActions: getActions,
-    callSiena: callSiena
+    getActions: getActions
 };
 
 function getActions() {
@@ -77,7 +75,6 @@ function getPerson({sessionId, context, text, entities}) {
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -95,7 +92,6 @@ function getInfo({sessionId, context, text, entities}) {
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -124,7 +120,6 @@ function getTalk({sessionId, context, text, entities}) {
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -149,7 +144,6 @@ function getTopic({sessionId, context, text, entities}) {
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -180,7 +174,6 @@ function getSocial({sessionId, context, text, entities}) {
     }
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -201,7 +194,6 @@ function getDemo({sessionId, context, text, entities}) {
     if(entities.keyword) {
         const witResponse = actionUtils.generateSienaAIQuery(entities, context);
         context.query = witResponse;
-        callSiena(witResponse, context);
     }
     else {
         let query = {
@@ -212,7 +204,6 @@ function getDemo({sessionId, context, text, entities}) {
             name: ""
         }
         context.query = query;
-        callSiena(query, context);
     }
     return Promise.resolve(context);
 }
@@ -231,7 +222,6 @@ function getGreeting({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -249,7 +239,6 @@ function getJoke({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
     return Promise.resolve(context);
 }
 
@@ -268,8 +257,6 @@ function getLocate({sessionId, context, text, entities}) {
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
-
     return Promise.resolve(context);
 }
 
@@ -335,8 +322,6 @@ function getEvent({sessionId, context, text, entities}) {
 
     const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
-    callSiena(witResponse, context);
-
     return Promise.resolve(context);
 }
 
@@ -376,7 +361,6 @@ function getHelp({sessionId, context, text, entities}) {
         name: ""
     };
     context.query = query;
-    callSiena(query, context);
     return Promise.resolve(context);
 }
 
@@ -394,24 +378,8 @@ function getThanks({sessionId, context, text, entities}) {
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const query = actionUtils.generateSienaAIQuery(entities,context);
     context.query = query;
-    callSiena(query, context);
     return Promise.resolve(context);
 }
 
-/**
- *  Utility functions
- */
-
-/**
- * make the call to Siena
- * @param query
- */
-function callSiena(query, context) {
-    console.log("CONTEXT IN CALL SIENA: ", context);
-    api.accessAPI(query)
-        .then(function(data) {
-            sendModule.buildChatbotResponseFromSienaResponse(data, context);
-        });
-}
 
 
