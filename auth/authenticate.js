@@ -24,11 +24,12 @@ function getFacebookID(fbid) {
             console.error("Unable to send message.");
             console.error(response);
             console.error(error);
+            return false;
         }
         else {
             console.log("AUTHENTICATION GET RESPONSE");
-            console.log(response);
             console.log(body);
+            return body.data.authenticated;
         }
     });
 }
