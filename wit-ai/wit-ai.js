@@ -6,6 +6,7 @@ const sessions = require('../sessions/sessions');
 const config = require('../config/default.json');
 const actions = require('./actions').getActions();
 const api = require('../api/api');
+const auth = require('../auth/authenticate');
 
 const wit = new Wit({
     accessToken: config.witAccessToken,
@@ -51,6 +52,12 @@ function callWitAI(req, res) {
         session.context
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
+        //check if req.body.sender.id exists
+        if(req.body.sender) {
+            //check authentication table with req.body.sender.id as query
+            auth.getFacebookID(req.body.sender);
+            //if not there, force the query to have intent "authenticate"
+        }
         api.accessAPI(context.query)
             .then(function(data) {
                 res.send(data);

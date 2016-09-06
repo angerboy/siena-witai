@@ -31,7 +31,9 @@ const actions = {
     getEvent: getEvent,
     getGif: getGif,
     getHelp: getHelp,
-    getThanks: getThanks
+    getThanks: getThanks,
+    getAuthenticate: getAuthenticate,
+    getPin: getPin
 }
 
 module.exports = {
@@ -273,30 +275,30 @@ function getDashboard({sessionId, context, text, entities}) {
     return Promise.resolve(context);
 }
 
-// /**
-//  * Handles the get pin intent. This will kick off the networking flow
-//  * @param sessionId
-//  * @param context
-//  * @param text
-//  * @param entities
-//  */
-// function getPin({sessionId, context, text, entities}) {
-//     console.log("get pin");
-//     console.log(`Session ${sessionId} received ${text}`);
-//     console.log(`The current context is ${JSON.stringify(context)}`);
-//     console.log(`Wit extracted ${JSON.stringify(entities)}`);
-//
-//     const pin = firstEntityValue(entities, 'pin_number');
-//     if(pin) {
-//         console.log("we received a pin")
-//         context.keyword = pin;
-//         var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-//         witResponse.intent = 'pin';
-//         callSiena(witResponse, context);
-//     }
-//
-//     return Promise.resolve(context);
-// }
+/**
+ * Handles the get pin intent. This will kick off the networking flow
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ */
+function getPin({sessionId, context, text, entities}) {
+    console.log("get pin");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+
+    const pin = firstEntityValue(entities, 'pin_number');
+    if(pin) {
+        //send to authentication table
+        console.log("we received a pin")
+        context.keyword = pin;
+        var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+        witResponse.intent = 'pin';
+    }
+
+    return Promise.resolve(context);
+}
 
 /**
  * Handles the get Event intent. This is a callback if wit misses get Social or get Talk
@@ -372,6 +374,24 @@ function getHelp({sessionId, context, text, entities}) {
  * @param entities
  */
 function getThanks({sessionId, context, text, entities}) {
+    console.log("get thanks");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    const query = actionUtils.generateSienaAIQuery(entities,context);
+    context.query = query;
+    return Promise.resolve(context);
+}
+
+/**
+ * Handles the authentication intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ * @returns {Promise.<*>}
+ */
+function getAuthenticate({sessionId, context, text, entities}) {
     console.log("get thanks");
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
