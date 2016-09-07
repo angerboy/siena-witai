@@ -13,26 +13,26 @@ module.exports = {
  * @param fbid
  */
 function getFacebookID(fbid) {
-    console.log("get facebook id");
-    request({
-        uri: config.authDynamoGetEndpoint,
-        qs: {id: fbid},
-        method: 'GET'
+    return new Promise(function(resolve, reject) {
+        request({
+            uri: config.authDynamoGetEndpoint,
+            qs: {id: fbid},
+            method: 'GET'
 
-    }, function (error, response, body) {
-        if(error) {
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
-            return false;
-        }
-        else {
-            console.log("AUTHENTICATION GET RESPONSE");
-            console.log("BODY: ", body);
-            const responseData = JSON.parse(body);
-            const isAuthenticated = responseData.data.authenticated;
-            return isAuthenticated;
-        }
+        }, function (error, response, body) {
+            if(error) {
+                console.error("Unable to send message.");
+                console.error(response);
+                console.error(error);
+                resolve(false);
+            }
+            else {
+                const responseData = JSON.parse(body);
+                //console.log("~GET~ RESPONSE BODY: ", responseData);
+                const isAuthenticated = responseData.data.authenticated;
+                resolve(isAuthenticated);
+            }
+        });
     });
 }
 
@@ -41,21 +41,25 @@ function getFacebookID(fbid) {
  * @param fbid
  */
 function putFacebookID(fbid) {
-    request({
-        uri: config.authDynamoGetEndpoint,
-        qs: {id: fbid},
-        method: 'POST'
+    return new Promise(function(resolve, reject) {
+        request({
+            uri: config.authDynamoGetEndpoint,
+            qs: {id: fbid},
+            method: 'POST'
 
-    }, function (error, response, body) {
-        if(error) {
-            console.error("Unable to send message.");
-            console.error(response);
-            console.error(error);
-        }
-        else {
-            console.log("AUTHENTICATION POST RESPONSE");
-            console.log(response);
-            console.log(body);
-        }
+        }, function (error, response, body) {
+            if(error) {
+                console.error("Unable to send message.");
+                console.error(response);
+                console.error(error);
+                resolve();
+            }
+            else {
+                //console.log("AUTHENTICATION ~POST~ RESPONSE");
+                const responseData = JSON.parse(body);
+                console.log("Response: ", responseData);
+                resolve(responseData);
+            }
+        });
     });
 }

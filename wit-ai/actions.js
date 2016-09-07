@@ -4,6 +4,8 @@ const session = require('../sessions/sessions');
 const api = require('../api/api');
 const actionUtils = require('../utils/wit-utils');
 const firebase = require('../firebase/firebase');
+const auth = require('../auth/authenticate');
+const facebook = require('../facebook/facebook');
 
 const firstEntityValue = (entities, entity) => {
     const val = entities && entities[entity] &&
@@ -52,7 +54,7 @@ function getActions() {
  * @param text
  */
 function send(request, response) {
-    console.log('No intent detected');
+    console.log('IN SEND ~~~~');
     return new Promise(function(resolve, reject) {
         console.log('user said...', request.text);
         console.log('sending...', JSON.stringify(response));
@@ -287,16 +289,38 @@ function getPin({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
-
-    const pin = firstEntityValue(entities, 'pin_number');
+    const pin = firstEntityValue(entities, 'number');
     if(pin) {
         //send to authentication table
         console.log("we received a pin")
         context.keyword = pin;
+        auth.putFacebookID(context.fbid).then(function(data) {
+            facebook.getName(context.fbid).then(function(name) {
+                context.name = name;
+                var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+                context.query = witResponse;
+                return Promise.resolve(context);
+            }, function(err) {
+                // TODO: if can't retrieve fb name do something
+                console.log("FACEBOOK ERROR: ", err);
+                var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+                context.query = witResponse;
+                return Promise.resolve(context);
+            });
+            var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+            context.query = witResponse;
+            return Promise.resolve(context);
+        }, function(err) { // TODO: if can't put facebook id in authentication table do something
+            console.log(err);
+            var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+            context.query = witResponse;
+            return Promise.resolve(context);
+        });
+    } else {
         var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-        witResponse.intent = 'pin';
+        context.query = witResponse;
+        return Promise.resolve(context);
     }
-
     return Promise.resolve(context);
 }
 
