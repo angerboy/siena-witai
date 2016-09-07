@@ -55,27 +55,31 @@ function callWitAI(req, res) {
 
         //check for Facebook users
         if(req.body.sender) {
+            api.accessAPI(context.query)
+                .then(function(data) {
+                    res.send(data);
+                });
             // check if user has authenticated
-            auth.getFacebookID(req.body.sender.id).then(function(isAuthenticated) {
-                isAuthenticated = true;
-                if(!isAuthenticated) {
-                    console.log("not authenticated");
-                    context.query.intent = "authenticate";
-                }
-                else {
-                    console.log("authenticated");
-                }
-                api.accessAPI(context.query)
-                    .then(function(data) {
-                        res.send(data);
-                    });
-            }, function(err) {
-                context.query.intent = "authenticate";
-                api.accessAPI(context.query)
-                    .then(function(data) {
-                        res.send(data);
-                    });
-            });
+            // auth.getFacebookID(req.body.sender.id).then(function(isAuthenticated) {
+            //     isAuthenticated = true;
+            //     if(!isAuthenticated) {
+            //         console.log("not authenticated");
+            //         context.query.intent = "authenticate";
+            //     }
+            //     else {
+            //         console.log("authenticated");
+            //     }
+            //     api.accessAPI(context.query)
+            //         .then(function(data) {
+            //             res.send(data);
+            //         });
+            // }, function(err) {
+            //     context.query.intent = "authenticate";
+            //     api.accessAPI(context.query)
+            //         .then(function(data) {
+            //             res.send(data);
+            //         });
+            // });
         }
         else {
             api.accessAPI(context.query)
