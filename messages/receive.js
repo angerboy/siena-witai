@@ -22,11 +22,11 @@ function receivedMessage(req, res) {
     if(!swearjar.profane(req.body.message.text)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
         if(!(req.body.sender)) {
-            console.log('USER MESSAGE: ', req.body.message.text);
+            console.log('WIT LAYER RECEIVES: ', req.body.message.text);
             witai.callWitAI(req, res);
         }
         else if(!(req.body.sender.id == config.chatbotFacebookId)) {
-            console.log('USER MESSAGE: ', req.body.message.text);
+            console.log('WIT LAYER RECEIVES: ', req.body.message.text);
             console.log('FROM: ', req.body.sender.id);
             witai.callWitAI(req, res);
         }
