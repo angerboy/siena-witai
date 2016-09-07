@@ -52,11 +52,14 @@ function callWitAI(req, res) {
         session.context
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
-        //check if req.body.sender.id exists
+
+        //check for Facebook users
         if(req.body.sender) {
-            //check authentication table with req.body.sender.id as query
-            auth.getFacebookID(req.body.sender);
-            //if not there, force the query to have intent "authenticate"
+            // check if user has authenticated
+            const isAuthenticated = auth.getFacebookID(req.body.sender);
+            // if(!isAuthenticated) {
+            //     context.query.intent = "authenticate";
+            // }
         }
         api.accessAPI(context.query)
             .then(function(data) {

@@ -28,8 +28,10 @@ function getFacebookID(fbid) {
         }
         else {
             console.log("AUTHENTICATION GET RESPONSE");
-            console.log(body);
-            return body;
+            console.log("BODY: ", body);
+            const responseData = JSON.parse(body);
+            const isAuthenticated = responseData.data.authenticated;
+            return isAuthenticated;
         }
     });
 }
