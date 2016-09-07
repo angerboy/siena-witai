@@ -28,12 +28,13 @@ const actions = {
     getJoke: getJoke,
     getLocate: getLocate,
     getDashboard: getDashboard,
+    getPin: getPin,
     getEvent: getEvent,
     getGif: getGif,
     getHelp: getHelp,
     getThanks: getThanks,
     getAuthenticate: getAuthenticate,
-    getPin: getPin
+    getCompany: getCompany
 }
 
 module.exports = {
@@ -52,7 +53,6 @@ function getActions() {
  */
 function send(request, response) {
     console.log('No intent detected');
-    console.log("REQUEST BODY: ", request.body)
     return new Promise(function(resolve, reject) {
         console.log('user said...', request.text);
         console.log('sending...', JSON.stringify(response));
@@ -392,7 +392,17 @@ function getThanks({sessionId, context, text, entities}) {
  * @returns {Promise.<*>}
  */
 function getAuthenticate({sessionId, context, text, entities}) {
-    console.log("get thanks");
+    console.log("get authenticate");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    const query = actionUtils.generateSienaAIQuery(entities,context);
+    context.query = query;
+    return Promise.resolve(context);
+}
+
+function getCompany({sessionId, context, text, entities}) {
+    console.log("get company");
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
