@@ -275,6 +275,14 @@ function getLocate({sessionId, context, text, entities}) {
  */
 function getDashboard({sessionId, context, text, entities}) {
     console.log("get dashboard");
+    let query = {
+        intent: "",
+        detail: "",
+        keyword: [],
+        time: "",
+        name: ""
+    }
+    context.query = query;
     firebase.pushUserInNeed(context.fbid);
     return Promise.resolve(context);
 }
