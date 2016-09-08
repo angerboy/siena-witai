@@ -17,7 +17,6 @@ module.exports = {
  * @param res
  */
 function receivedMessage(req, res) {
-    console.log("REQUEST BODY: ", req.body);
     if(req.body.postback) {
         var userText = req.body.postback.payload;
     }

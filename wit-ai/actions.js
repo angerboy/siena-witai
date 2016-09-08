@@ -6,6 +6,7 @@ const actionUtils = require('../utils/wit-utils');
 const firebase = require('../firebase/firebase');
 const auth = require('../auth/authenticate');
 const facebook = require('../facebook/facebook');
+const idls = require('../idls/insert');
 
 const firstEntityValue = (entities, entity) => {
     const val = entities && entities[entity] &&
@@ -296,14 +297,11 @@ function getPin({sessionId, context, text, entities}) {
         console.log("we received a pin")
         context.keyword = pin;
         auth.putFacebookID(context.fbid).then(function(data) {
-            facebook.getName(context.fbid).then(function(name) {
-                context.name = name;
+            idls.insertFacebookId(context.fbid, pin).then(function() {
                 var witResponse = actionUtils.generateSienaAIQuery(entities, context);
                 context.query = witResponse;
                 return Promise.resolve(context);
             }, function(err) {
-                // TODO: if can't retrieve fb name do something
-                console.log("FACEBOOK ERROR: ", err);
                 var witResponse = actionUtils.generateSienaAIQuery(entities, context);
                 context.query = witResponse;
                 return Promise.resolve(context);
@@ -312,7 +310,6 @@ function getPin({sessionId, context, text, entities}) {
             context.query = witResponse;
             return Promise.resolve(context);
         }, function(err) { // TODO: if can't put facebook id in authentication table do something
-            console.log(err);
             var witResponse = actionUtils.generateSienaAIQuery(entities, context);
             context.query = witResponse;
             return Promise.resolve(context);
