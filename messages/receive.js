@@ -19,7 +19,8 @@ module.exports = {
 function receivedMessage(req, res) {
     console.log("REQUEST BODY: ", req.body);
     // Make sure the user message is not profane
-    if(!swearjar.profane(req.body.message.text)) {
+    var userText = req.body.message.text || "";
+    if(!swearjar.profane(userText)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
         if(!(req.body.sender)) {
             console.log('WIT LAYER RECEIVES: ', req.body.message.text);
