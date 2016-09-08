@@ -18,16 +18,20 @@ module.exports = {
  */
 function receivedMessage(req, res) {
     console.log("REQUEST BODY: ", req.body);
-    // Make sure the user message is not profane
-    var userText = req.body.message.text || "";
+    if(req.body.postback) {
+        var userText = req.body.postback.payload;
+    }
+    else {
+        var userText = req.body.message.text;
+    }
     if(!swearjar.profane(userText)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
         if(!(req.body.sender)) {
-            console.log('WIT LAYER RECEIVES: ', req.body.message.text);
+            console.log('WIT LAYER RECEIVES: ', userText);
             witai.callWitAI(req, res);
         }
         else if(!(req.body.sender.id == config.chatbotFacebookId)) {
-            console.log('WIT LAYER RECEIVES: ', req.body.message.text);
+            console.log('WIT LAYER RECEIVES: ', userText);
             console.log('FROM: ', req.body.sender.id);
             witai.callWitAI(req, res);
         }
