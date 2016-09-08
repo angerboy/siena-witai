@@ -36,7 +36,8 @@ const actions = {
     getHelp: getHelp,
     getThanks: getThanks,
     getAuthenticate: getAuthenticate,
-    getCompany: getCompany
+    getCompany: getCompany,
+    getNetwork: getNetwork
 }
 
 module.exports = {
@@ -425,12 +426,40 @@ function getAuthenticate({sessionId, context, text, entities}) {
     return Promise.resolve(context);
 }
 
+/**
+ * Handles the get company intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ * @returns {Promise.<*>}
+ */
 function getCompany({sessionId, context, text, entities}) {
     console.log("get company");
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     const query = actionUtils.generateSienaAIQuery(entities,context);
+    context.query = query;
+    return Promise.resolve(context);
+}
+
+
+/**
+ * Handles the networking intent
+ * @param sessionId
+ * @param context
+ * @param text
+ * @param entities
+ * @returns {Promise.<*>}
+ */
+function getNetwork({sessionId, context, text, entities}) {
+    console.log("get network");
+    console.log(`Session ${sessionId} received ${text}`);
+    console.log(`The current context is ${JSON.stringify(context)}`);
+    console.log(`Wit extracted ${JSON.stringify(entities)}`);
+    const query = actionUtils.generateSienaAIQuery(entities,context);
+    query.keyword = context.fbid;
     context.query = query;
     return Promise.resolve(context);
 }
