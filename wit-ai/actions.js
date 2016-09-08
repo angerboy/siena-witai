@@ -458,8 +458,8 @@ function getNetwork({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
-    const query = actionUtils.generateSienaAIQuery(entities,context);
-    query.keyword = context.fbid;
+    var query = actionUtils.generateSienaAIQuery(entities,context);
+    query = actionUtils.replaceKeywordWithFacebookId(query, context.fbid);
     context.query = query;
     return Promise.resolve(context);
 }

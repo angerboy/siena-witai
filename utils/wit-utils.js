@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-    generateSienaAIQuery:generateSienaAIQuery
+    generateSienaAIQuery:generateSienaAIQuery,
+    replaceKeywordWithFacebookId: replaceKeywordWithFacebookId
 };
 
 function generateSienaAIQuery(entities, context) {
@@ -40,4 +41,12 @@ function generateSienaAIQuery(entities, context) {
     }
 
     return data;
+}
+
+function replaceKeywordWithFacebookId(query, fbid) {
+    if(query.keyword.indexOf("sendEmail") > -1) {
+        query.keyword = [fbid];
+        return query;
+    }
+    return query;
 }
