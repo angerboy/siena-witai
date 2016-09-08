@@ -278,7 +278,7 @@ function getDashboard({sessionId, context, text, entities}) {
 }
 
 /**
- * Handles the get pin intent. This will kick off the networking flow
+ * Handles the get pin intent. This action is used for user authentication.
  * @param sessionId
  * @param context
  * @param text
