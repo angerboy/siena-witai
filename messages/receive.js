@@ -17,7 +17,7 @@ module.exports = {
  * @param res
  */
 function receivedMessage(req, res) {
-
+    console.log("REQUEST BODY: ", req.body);
     // Make sure the user message is not profane
     if(!swearjar.profane(req.body.message.text)) {
         // Work around for chatbot bug - check if the message is from the chatbot itself
