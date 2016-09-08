@@ -52,6 +52,7 @@ function callWitAI(req, res) {
         session.context
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
+        console.log("CONTEXT AFTER WIT: ", context);
         if(context.query.intent === ""){
             console.log("clarify");
             context.query.intent = "clarify";
