@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ff7ef3f-a7f6-4ad9-9ae7-683c66ac49f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wit-ai/wit-ai.js" afterPath="$PROJECT_DIR$/wit-ai/wit-ai.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/wit-utils.js" afterPath="$PROJECT_DIR$/utils/wit-utils.js" />
     </list>
     <ignored path="witai.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,17 +35,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wit-utils.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wit-utils.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            <state relative-caret-position="420">
+              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wit-ai.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="wit-ai.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="254">
@@ -113,9 +113,9 @@
         <option value="$PROJECT_DIR$/messages/receive.js" />
         <option value="$PROJECT_DIR$/facebook/facebook.js" />
         <option value="$PROJECT_DIR$/auth/authenticate.js" />
-        <option value="$PROJECT_DIR$/utils/wit-utils.js" />
         <option value="$PROJECT_DIR$/wit-ai/actions.js" />
         <option value="$PROJECT_DIR$/wit-ai/wit-ai.js" />
+        <option value="$PROJECT_DIR$/utils/wit-utils.js" />
       </list>
     </option>
   </component>
@@ -345,12 +345,12 @@
       <workItem from="1472822845200" duration="12191000" />
       <workItem from="1473170949583" duration="15795000" />
       <workItem from="1473203708965" duration="16304000" />
-      <workItem from="1473342299778" duration="7859000" />
+      <workItem from="1473342299778" duration="7972000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147477000" />
+    <option name="totallyTimeSpent" value="147590000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-376" y="-1057" width="1920" height="996" extended-state="0" />
@@ -741,10 +741,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
+    <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        <state relative-caret-position="254">
+          <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -757,10 +757,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
+    <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="55" column="35" selection-start-line="55" selection-start-column="35" selection-end-line="55" selection-end-column="35" />
+        <state relative-caret-position="420">
+          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
           <folding />
         </state>
       </provider>

@@ -18,7 +18,7 @@ function generateSienaAIQuery(entities, context) {
         data.intent = entities.intent[0].value.toLowerCase();
     }
     else {
-        data.intent = "info";
+        data.intent = "clarify";
     }
     if(context.name) {
         data.name = context.name.toLowerCase();
