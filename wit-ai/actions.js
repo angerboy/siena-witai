@@ -304,24 +304,12 @@ function getPin({sessionId, context, text, entities}) {
         //send to authentication table
         console.log("we received a pin")
         context.keyword = pin;
-        auth.putFacebookID(context.fbid).then(function(data) {
-            idls.insertFacebookId(context.fbid, pin).then(function() {
-                var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-                context.query = witResponse;
-                return Promise.resolve(context);
-            }, function(err) {
-                var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-                context.query = witResponse;
-                return Promise.resolve(context);
-            });
-            var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-            context.query = witResponse;
-            return Promise.resolve(context);
-        }, function(err) { // TODO: if can't put facebook id in authentication table do something
-            var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-            context.query = witResponse;
-            return Promise.resolve(context);
-        });
+        auth.putFacebookID(context.fbid);
+        idls.insertFacebookId(context.fbid, pin);
+        var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+        context.query = witResponse;
+        return Promise.resolve(context);
+
     } else {
         var witResponse = actionUtils.generateSienaAIQuery(entities, context);
         context.query = witResponse;
