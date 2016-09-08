@@ -44,7 +44,7 @@ function generateSienaAIQuery(entities, context) {
 }
 
 function replaceKeywordWithFacebookId(query, fbid) {
-    if(query.keyword.indexOf("sendEmail") > -1) {
+    if(query.keyword.indexOf("sendemail") > -1) {
         query.keyword = [fbid];
         return query;
     }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ff7ef3f-a7f6-4ad9-9ae7-683c66ac49f4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/messages/receive.js" afterPath="$PROJECT_DIR$/messages/receive.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/wit-utils.js" afterPath="$PROJECT_DIR$/utils/wit-utils.js" />
     </list>
     <ignored path="witai.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,18 +28,18 @@
       <file leaf-file-name="actions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wit-ai/actions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
+            <state relative-caret-position="-2071">
               <caret line="276" column="42" selection-start-line="276" selection-start-column="42" selection-end-line="276" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="wit-utils.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wit-utils.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
+            <state relative-caret-position="690">
+              <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receive.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="receive.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/messages/receive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="88" selection-start-line="27" selection-start-column="88" selection-end-line="27" selection-end-column="88" />
+            <state relative-caret-position="225">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -114,8 +114,8 @@
         <option value="$PROJECT_DIR$/auth/authenticate.js" />
         <option value="$PROJECT_DIR$/wit-ai/actions.js" />
         <option value="$PROJECT_DIR$/wit-ai/wit-ai.js" />
-        <option value="$PROJECT_DIR$/utils/wit-utils.js" />
         <option value="$PROJECT_DIR$/messages/receive.js" />
+        <option value="$PROJECT_DIR$/utils/wit-utils.js" />
       </list>
     </option>
   </component>
@@ -345,12 +345,12 @@
       <workItem from="1472822845200" duration="12191000" />
       <workItem from="1473170949583" duration="15795000" />
       <workItem from="1473203708965" duration="16304000" />
-      <workItem from="1473342299778" duration="10543000" />
+      <workItem from="1473342299778" duration="10651000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150161000" />
+    <option name="totallyTimeSpent" value="150269000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-376" y="-1057" width="1920" height="996" extended-state="0" />
@@ -733,22 +733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wit-ai/actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="276" column="42" selection-start-line="276" selection-start-column="42" selection-end-line="276" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="22" selection-start-line="28" selection-start-column="22" selection-end-line="28" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wit-ai/wit-ai.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -759,8 +743,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/messages/receive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="88" selection-start-line="27" selection-start-column="88" selection-end-line="27" selection-end-column="88" />
+        <state relative-caret-position="225">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wit-ai/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2071">
+          <caret line="276" column="42" selection-start-line="276" selection-start-column="42" selection-end-line="276" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/wit-utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
           <folding />
         </state>
       </provider>
