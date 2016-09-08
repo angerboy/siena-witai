@@ -17,6 +17,7 @@
     "node-wit": "^4.1.0",
     "promise": "^7.1.1",
     "request": "^2.74.0",
+    "request-promise": "^4.1.1",
     "sessions": "0.0.2-7",
     "swagger-client": "^2.1.18",
     "swearjar": "^0.1.3"
