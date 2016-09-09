@@ -276,7 +276,7 @@ function getLocate({sessionId, context, text, entities}) {
 function getDashboard({sessionId, context, text, entities}) {
     console.log("get dashboard");
     let query = {
-        intent: "",
+        intent: "dashboard",
         detail: "",
         keyword: [],
         time: "",
