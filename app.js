@@ -9,6 +9,8 @@ firebase.initializeApp();
 
 var app = express();
 
+app.use(express.static('loader-io'));
+
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('public'));
 app.use(bodyParser.json());
