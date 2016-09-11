@@ -3,6 +3,9 @@
 var firebase = require('firebase');
 var FB = require('fb');
 const config = require('../config/default.json');
+const constants = require('../config/constants');
+var sessions;
+var attendees;
 
 module.exports = {
     pushUserInNeed:pushUserInNeed,
@@ -17,12 +20,40 @@ function initializeApp() {
         storageBucket: "",
     };
 
-    firebase.initializeApp(config);
+    var config_2 = {
+        apiKey: "AIzaSyCh8vOOD5TQad_cBWOWUsrPB0Lj3was-cc",
+        authDomain: "siena-attendees.firebaseapp.com",
+        databaseURL: "https://siena-attendees.firebaseio.com",
+        storageBucket: "",
+    };
+
+    sessions = firebase.initializeApp(config);
+    attendees = firebase.initializeApp(config_2, 'Secondary');
 }
 
 function getDatabaseRef() {
-    var database = firebase.database().ref('user_list');
+    var database = sessions.database().ref('user_list');
     return database;
+}
+
+function getAttendeeRef() {
+    var database = attendees.database().ref('attendee_list');
+    return database;
+}
+
+function getAttendeeList() {
+    console.log("Get attendee list");
+    return new Promise(function(resolve, reject) {
+        var attendees = [];
+        var attendeeRef = getAttendeeRef();
+        attendeeRef.once('value', function(snapshot) {
+            snapshot.forEach(function(snapshot) {
+                console.log(snapshot.child("name").val());
+                attendees.push(snapshot.child("name").val());
+            });
+            resolve(attendees);
+        })
+    })
 }
 
 function pushUserInNeed(fbid) {
@@ -40,11 +71,17 @@ function pushUserInNeed(fbid) {
             console.log(!res ? 'error occurred' : res.error);
             return;
         }
-        // post user
-        var name = res.first_name + ' ' + res.last_name;
-        newUserRef.set({
-            'name': name,
-            'fbid': fbid
-        });
+
+        getAttendeeList().then(
+            function(attendees) {
+                var attendee  = attendees[Math.floor(Math.random()*attendees.length)]
+                var name = res.first_name + ' ' + res.last_name;
+                newUserRef.set({
+                    'name': name,
+                    'attendee':attendee,
+                    'fbid': fbid
+                });
+            }
+        )
     });
 }

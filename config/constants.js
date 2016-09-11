@@ -1,4 +1,5 @@
 'use strict';
+var firebase = require('firebase');
 
 const foodEmojis = [":hamburger:", ":pizza:", ":spaghetti:", ":poultry_leg:"];
 
@@ -12,7 +13,9 @@ const gifs = [
 module.exports = {
     getJoke: getJoke,
     getFoodEmojis: getFoodEmojis,
-    getGif: getGif
+    getGif: getGif,
+    getSessionsConfg:getSessionsConfig,
+    getAttendeeConfig:getAttendeeConfig
 };
 
 function getJoke() {
@@ -26,3 +29,24 @@ function getFoodEmojis() {
 function getGif() {
     return gifs[Math.floor(Math.random()*gifs.length)];
 }
+
+function getSessionsConfig() {
+    var config = {
+        apiKey: "AIzaSyA2tsbRsa1xG6zbSO7Kuw0_X4jy6qD2Z_M",
+        authDomain: "siena-dashboard.firebaseapp.com",
+        databaseURL: "https://siena-dashboard.firebaseio.com",
+        storageBucket: "",
+    };
+    return config;
+}
+
+function getAttendeeConfig() {
+    var config = {
+        apiKey: "AIzaSyCh8vOOD5TQad_cBWOWUsrPB0Lj3was-cc",
+        authDomain: "siena-attendees.firebaseapp.com",
+        databaseURL: "https://siena-attendees.firebaseio.com",
+        storageBucket: "",
+    };
+    return config;
+}
+
