@@ -14,12 +14,24 @@ function generateSienaAIQuery(entities, context) {
         time: "",
         name: ""
     };
-    if(entities.intent) {
-        data.intent = entities.intent[0].value.toLowerCase();
+    if(entities) {
+        if(entities.intent) {
+            data.intent = entities.intent[0].value.toLowerCase();
+        }
+        else {
+            data.intent = "clarify";
+        }
+
+        if(entities.keyword) {
+            entities.keyword.forEach(function(keyword) {
+                data.keyword.push(keyword.value.toLowerCase());
+            });
+        }
+
+    } else {
+        data.intent = "timeout";
     }
-    else {
-        data.intent = "clarify";
-    }
+
     if(context.name) {
         data.name = context.name.toLowerCase();
     }
@@ -29,12 +41,6 @@ function generateSienaAIQuery(entities, context) {
     if(context.time) {
         const date = new Date(context.time);
         data.time = date.getTime();
-    }
-    if(entities.keyword) {
-        console.log(entities.keyword);
-        entities.keyword.forEach(function(keyword) {
-            data.keyword.push(keyword.value.toLowerCase());
-        });
     }
     if(context.keyword) {
         data.keyword.push(context.keyword);
