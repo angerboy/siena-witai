@@ -56,6 +56,20 @@ function getAttendeeList() {
     })
 }
 
+function isDuplicateFBUser(fbid) {
+    return new Promise(function(resolve, reject) {
+        var dbRef = getDatabaseRef();
+        dbRef.once('value', function(snapshot) {
+            snapshot.forEach(function(snapshot) {
+                if(snapshot.child("fbid") === fbid) {
+                    resolve(true);
+                }
+            });
+            resolve(false);
+        })
+    })
+}
+
 function pushUserInNeed(fbid) {
 
     var databaseRef = getDatabaseRef();
@@ -71,16 +85,21 @@ function pushUserInNeed(fbid) {
             console.log(!res ? 'error occurred' : res.error);
             return;
         }
-
-        getAttendeeList().then(
-            function(attendees) {
-                var attendee  = attendees[Math.floor(Math.random()*attendees.length)]
-                var name = res.first_name + ' ' + res.last_name;
-                newUserRef.set({
-                    'name': name,
-                    'attendee':attendee,
-                    'fbid': fbid
-                });
+        isDuplicateFBUser(fbid).then(
+            function(isDuplicateUser) {
+                if(!isDuplicateUser) {
+                    getAttendeeList().then(
+                        function(attendees) {
+                            var attendee  = attendees[Math.floor(Math.random()*attendees.length)]
+                            var name = res.first_name + ' ' + res.last_name;
+                            newUserRef.set({
+                                'name': name,
+                                'attendee':attendee,
+                                'fbid': fbid
+                            });
+                        }
+                    )
+                }
             }
         )
     });
