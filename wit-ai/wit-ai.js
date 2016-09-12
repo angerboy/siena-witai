@@ -53,9 +53,9 @@ function callWitAI(req, res) {
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
         console.log("CONTEXT AFTER WIT: ", context);
-        if(context.query.intent === ""){
-            context.query.intent = "clarify";
-        }
+        // if(context.query.intent === ""){
+        //     context.query.intent = "clarify";
+        // }
         //check for Facebook users
         if(req.body.sender) {
             auth.getFacebookID(req.body.sender.id).then(function(isAuthenticated) {
