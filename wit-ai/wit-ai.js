@@ -64,8 +64,19 @@ function callWitAI(req, res) {
             };
         }
         else {
-            if(context.query.intent === ""){
-                context.query.intent = "clarify";
+            if(context.query === undefined) {
+                context.query = {
+                    intent: "timeout",
+                    detail: "",
+                    keyword: [],
+                    time: "",
+                    name: ""
+                };
+            }
+            else {
+                if(context.query.intent === ""){
+                    context.query.intent = "clarify";
+                }
             }
         }
         //check for Facebook users
