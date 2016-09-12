@@ -53,7 +53,7 @@ function callWitAI(req, res) {
     ).then((context) => {
         console.log('FINISHED WIT ACTIONS *************');
         console.log("CONTEXT AFTER WIT: ", context);
-        if(!context) {
+        if(context === undefined) {
             context = {};
             context.query =  {
                 intent: "timeout",
