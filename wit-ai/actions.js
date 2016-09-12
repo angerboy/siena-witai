@@ -286,7 +286,7 @@ function getDashboard({sessionId, context, text, entities}) {
         name: ""
     }
     context.query = query;
-    firebase.pushUserInNeed(context.fbid);
+    firebase.pushUserInNeed(sessionId);
     return Promise.resolve(context);
 }
 
@@ -307,8 +307,8 @@ function getPin({sessionId, context, text, entities}) {
         //send to authentication table
         console.log("we received a pin")
         context.keyword = pin;
-        auth.putFacebookID(context.fbid);
-        idls.insertFacebookId(context.fbid, pin);
+        auth.putFacebookID(sessionId);
+        idls.insertFacebookId(sessionId, pin);
         var witResponse = actionUtils.generateSienaAIQuery(entities, context);
         context.query = witResponse;
         return Promise.resolve(context);
@@ -455,7 +455,7 @@ function getNetwork({sessionId, context, text, entities}) {
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
     var query = actionUtils.generateSienaAIQuery(entities,context);
-    query = actionUtils.replaceKeywordWithFacebookId(query, context.fbid);
+    query = actionUtils.replaceKeywordWithFacebookId(query, sessionId);
     context.query = query;
     return Promise.resolve(context);
 }

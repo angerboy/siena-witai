@@ -29,8 +29,8 @@ function callWitAI(req, res) {
 
     // Handle session context only for facebook users
     if(req.body.sender) {
-        session = sessions.findOrCreateSession(req.body.sender.id);
-        session.context.fbid = req.body.sender.id; // Do we need this????
+        session = sessions.createSession();
+        session.id = req.body.sender.id;
     }
     else {
         session = sessions.createSession();
