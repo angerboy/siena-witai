@@ -302,22 +302,18 @@ function getPin({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
-    const pin = firstEntityValue(entities, 'number'); // TODO- datetime to pin
+    var pin = firstEntityValue(entities, 'number'); // TODO- datetime to pin
     if(pin) {
-        //send to authentication table
-        console.log("we received a pin")
         context.keyword = pin;
-        auth.putFacebookID(sessionId);
-        idls.insertFacebookId(sessionId, pin);
-        var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-        context.query = witResponse;
-        return Promise.resolve(context);
-
     } else {
-        var witResponse = actionUtils.generateSienaAIQuery(entities, context);
-        context.query = witResponse;
-        return Promise.resolve(context);
+        const time = firstEntityValue(entities, 'datetime');
+        pin = time.value.substring(0,4);
     }
+    var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    auth.putFacebookID(sessionId);
+    idls.insertFacebookId(sessionId, pin);
+    var witResponse = actionUtils.generateSienaAIQuery(entities, context);
+    context.query = witResponse;
     return Promise.resolve(context);
 }
 
