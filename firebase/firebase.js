@@ -98,7 +98,8 @@ function pushUserInNeed(fbid) {
                             newUserRef.set({
                                 'name': name,
                                 'attendee':attendee,
-                                'fbid': fbid
+                                'fbid': fbid,
+                                'timestamp': Date.now()
                             });
                         }
                     )

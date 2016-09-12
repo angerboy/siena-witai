@@ -58,8 +58,8 @@
       <file leaf-file-name="firebase.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/firebase/firebase.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="68" column="44" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
+            <state relative-caret-position="675">
+              <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -444,12 +444,12 @@
       <workItem from="1473203708965" duration="16304000" />
       <workItem from="1473342299778" duration="14935000" />
       <workItem from="1473428732569" duration="8879000" />
-      <workItem from="1473613938403" duration="7463000" />
+      <workItem from="1473613938403" duration="8138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="170895000" />
+    <option name="totallyTimeSpent" value="171570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-376" y="-1057" width="1920" height="1057" extended-state="6" />
@@ -858,8 +858,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/firebase/firebase.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="68" column="44" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
+        <state relative-caret-position="675">
+          <caret line="107" column="9" selection-start-line="107" selection-start-column="9" selection-end-line="107" selection-end-column="9" />
           <folding />
         </state>
       </provider>
