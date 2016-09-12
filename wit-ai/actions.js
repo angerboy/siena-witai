@@ -307,7 +307,9 @@ function getPin({sessionId, context, text, entities}) {
         context.keyword = pin;
     } else {
         const time = firstEntityValue(entities, 'datetime');
-        pin = time.value.substring(0,4);
+        console.log("DATETIME: ", time);
+        console.log(time.value);
+        //pin = time.value.substring(0,4);
     }
     var witResponse = actionUtils.generateSienaAIQuery(entities, context);
     auth.putFacebookID(sessionId);
