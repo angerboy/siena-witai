@@ -61,7 +61,7 @@ function isDuplicateFBUser(fbid) {
         var dbRef = getDatabaseRef();
         dbRef.once('value', function(snapshot) {
             snapshot.forEach(function(snapshot) {
-                if(snapshot.child("fbid") === fbid) {
+                if(snapshot.child("fbid").val() === fbid) {
                     console.log("already user");
                     resolve(true);
                 }
