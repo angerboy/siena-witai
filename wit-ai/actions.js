@@ -95,11 +95,11 @@ function getPerson({sessionId, context, text, entities}) {
 function getInfo({sessionId, context, text, entities}) {
     console.log("get info");
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
-    const witResponse = actionUtils.generateSienaAIQuery(entities, context);
-    if(witResponse.name) {
-        witResponse.keyword.push(witResponse.name);
-        witResponse.name = "";
+    const contact = firstEntityValue(entities, 'contact');
+    if(contact) {
+        context.keyword = contact;
     }
+    const witResponse = actionUtils.generateSienaAIQuery(entities, context);
     context.query = witResponse;
     return Promise.resolve(context);
 }
