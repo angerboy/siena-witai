@@ -62,9 +62,11 @@ function isDuplicateFBUser(fbid) {
         dbRef.once('value', function(snapshot) {
             snapshot.forEach(function(snapshot) {
                 if(snapshot.child("fbid") === fbid) {
+                    console.log("already user");
                     resolve(true);
                 }
             });
+            console.log("not already user");
             resolve(false);
         })
     })
@@ -87,6 +89,7 @@ function pushUserInNeed(fbid) {
         }
         isDuplicateFBUser(fbid).then(
             function(isDuplicateUser) {
+                console.log("isDuplicateUser: ", isDuplicateUser);
                 if(!isDuplicateUser) {
                     getAttendeeList().then(
                         function(attendees) {
