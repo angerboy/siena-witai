@@ -311,7 +311,7 @@ function getPin({sessionId, context, text, entities}) {
     }
     else if(time) {
         console.log("DATETIME: ", time);
-        context.keyword = time.value.substring(0,4);
+        context.keyword = time.substring(0,4);
         auth.putFacebookID(sessionId);
         idls.insertFacebookId(sessionId, context.keyword);
     }
