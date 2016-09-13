@@ -453,6 +453,15 @@ function getNetwork({sessionId, context, text, entities}) {
     console.log(`Session ${sessionId} received ${text}`);
     console.log(`The current context is ${JSON.stringify(context)}`);
     console.log(`Wit extracted ${JSON.stringify(entities)}`);
+
+    const sendEmail = firstEntityValue(entities, "sendEmail");
+    if(sendEmail) {
+        context.detail = "sendEmail";
+    }
+    else {
+        context.detail = "findConnections";
+    }
+
     var query = actionUtils.generateSienaAIQuery(entities,context);
     query = actionUtils.replaceKeywordWithFacebookId(query, sessionId);
     context.query = query;

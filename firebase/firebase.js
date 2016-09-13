@@ -93,7 +93,7 @@ function pushUserInNeed(fbid) {
                 if(!isDuplicateUser) {
                     getAttendeeList().then(
                         function(attendees) {
-                            var attendee  = attendees[Math.floor(Math.random()*attendees.length)]
+                            var attendee  = attendees[Math.floor(Math.random()*attendees.length)];
                             var name = res.first_name + ' ' + res.last_name;
                             newUserRef.set({
                                 'name': name,
